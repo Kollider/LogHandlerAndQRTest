@@ -20,35 +20,55 @@ with open("app_2.log") as f:
     for line in f:
         marker_left = line.find("'")
         marker_right = line.rfind("'")
-
         if marker_right and marker_left != -1:
             line_without_date = line[marker_left + 1:marker_right - 1]
-
             content = line_without_date.split(";")
             if len(content) > 6:
+                content = [x.strip() for x in content]
                 structure = {key: value for key, value in zip(order_1, content)}
                 data.append(structure)
-
-
                 new_line = 1
-                print(marker_left, marker_right)
-
-
-                content=[x.strip() for x in content]
-
-
-
+                # print(marker_left, marker_right)
                 new_count += 1
-
-
-                pass
         count += 1
-
-    print(count)
+    """    print(count)
     print(new_count)
-    print(notWorking_ids)
-    for entry in data:
-        file_for_logs.write(json.dumps(entry, indent = 4) + '\n')
+    print(notWorking_ids)"""
+"""for entry in data:
+    file_for_logs.write(json.dumps(entry, indent=4) + '\n')"""
+
+devices = {'92ABF9': 1}
+not_working_devices = []
+
+for item in data:
+    print(item['id'], item['state'])
+    dev_id = item['id']
+    dev_state = item['state']
+
+    if dev_id in devices and dev_state != 'DD':
+        dev_number = devices[dev_id]
+        print(dev_number)
+        new_dev_number = dev_number + 1
+        devices[dev_id] = new_dev_number
 
 
-    file_for_logs.close()
+    else:
+        if dev_state == 'DD':
+            devices.pop(dev_id, None)
+            if dev_id not in not_working_devices:
+                not_working_devices.append(dev_id)
+        elif dev_state == '02':
+            if dev_id in not_working_devices:
+                pass
+            else:
+                devices[dev_id]=1
+
+    file_for_logs.write(item['state'] + '\n')
+
+    """for key in item:
+        print('key =',key,'\n', 'value=',item[key])"""
+file_for_logs.close()
+
+print('devices = ',len(devices))
+
+print(not_working_devices)
