@@ -1,13 +1,13 @@
 import pytest
 from scanner_handler import *
 
-db_test = ['blabl', 'bla', 'asd', 'qwer']
+db_test = ['blabl', 'bla', 'asd', 'qwer'] #imitation of the database
 
 
 @pytest.fixture
 def example_qr_codes():
-    return ['bla', 'blabl', 'blablab', 'blabla', 'blablablabla', 'qwer', 'blaslab']
-
+    return ['bla', 'blabl', 'blablab', 'blabla', 'blablablabla', 'qwer', 'blaslab'] #examples of the qr codes
+#There was a need to avoid the ConnectionError, as it was not possible to connect to database
 def some_test_func(self, second):
     if second in db_test:
         return True
