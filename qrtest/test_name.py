@@ -35,7 +35,7 @@ def test_check_len_color_7_letters(example_qr_codes):
 
 def test_check_len_color_4_letters(example_qr_codes):
     a.check_scanned_device(example_qr_codes[5])
-    assert a.color not in ('Fuzzy Wuzzy', 'Green', 'Red')
+    assert a.color  in ('Fuzzy Wuzzy', 'Green', 'Red')
 
 
 def test_check_not_in_db(example_qr_codes):
