@@ -8,24 +8,11 @@ db_test = ['blabl', 'bla', 'asd', 'qwer']
 def example_qr_codes():
     return ['bla', 'blabl', 'blablab', 'blabla', 'blablablabla', 'qwer', 'blaslab']
 
-"""
-def my_decor(func):
-    def wrapper(*args, **kwargs):
-        print(func.__name__, '+', func.__dir__)
-        print()
-        print(func.__dict__)
-        return func(*args)
-
-    return wrapper
-"""
-
-
 def some_test_func(self, second):
     if second in db_test:
         return True
     elif second not in db_test:
         return None
-
 
 CheckQr.check_in_db = some_test_func
 a = CheckQr()
@@ -56,16 +43,3 @@ def test_check_not_in_db(example_qr_codes):
 
 def test_can_add_device(example_qr_codes):
     a.check_scanned_device(example_qr_codes[0])
-    
-
-
-"""
-
-with suppress(ConnectionError):
-    a.check_scanned_device(ex_qr_codes[0])
-
-try:
-    a.check_scanned_device(ex_qr_codes[0])
-except ConnectionError:
-    print(a.__dir__())
-"""
